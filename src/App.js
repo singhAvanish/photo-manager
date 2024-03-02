@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Photos from "./pages/Photos";
+import SignIn from "./pages/SignIn";
+import ImageView from "./pages/ImageView";
+// import { getDatabase, ref, set } from "firebase/database";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+// import { app } from "./firebase";
+import SignUp from "./pages/SignUp";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// const db = getDatabase(app);
+// const auth = getAuth(app);
 
 function App() {
+  // const signupUser = () => {
+  //   createUserWithEmailAndPassword(auth, "avanish121299@gmail.com", "12345678");
+  // };
+  //   const putData = () => {
+  //     set(ref(db, "users/avi"), {
+  //       id: 1,
+  //       name: "avanish",
+  //       age: 24,
+  //     });
+  //   };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/photos" element={<Photos />} />
+          <Route path="/" element={<SignUp />} />
+          <Route path="/image" element={<ImageView />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

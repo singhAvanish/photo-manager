@@ -1,38 +1,80 @@
-.App {
-  text-align: center;
-}
+body {
+  background-color: #8cb9bd;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+  .App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main {
+    height: 50vh;
+    width: 40vh;
+    border: 10px solid #ecb159;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 25vh;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    background-color: #fefbf6;
+    color: #b67352;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.label {
+}
+.input {
+  width: 50%;
+  border-radius: 20px;
+  border: 2px solid #ecb159;
+  color: #b67352;
+}
+.btn {
+  background-color: #ecb159;
+  border: 2px solid white;
+  border-radius: 10px;
+  height: 5vh;
+  width: 15vh;
+  margin-top: 2vh;
+}
+
+.photo-main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10vh;
+}
+.photo {
+  height: 100vh;
+  width: 100vh;
+}
+.photos {
+  width: 25vh;
+  margin-right: 5vh;
+  height: 25vh;
+  border-radius: 20px;
+}
+html:not(.mobile) img:hover {
+  cursor: zoom-in;
+  transition: 0s;
+  transition-delay: 90s; /* how long before the img automatically returns to original size */
+  transition-property: -webkit-transform;
+  -webkit-transform: scale(1);
+  z-index: 500;
+  position: center; /* this and z-index should ensure that the zoomed img is always displayed on top of any other element */
 }
 
-.App-link {
-  color: #61dafb;
+html:not(.mobile) img:active {
+  cursor: zoom-out;
+  -overflow: auto; /* Enable scroll if needed */
+  transition: 0s;
+  transition-delay: 0.05s;
+  transition-property: -webkit-transform;
+  -webkit-transform: scale(3); /* set zoom level */
+  -webkit-transform-origin: 50% 10%; /* set img position */
+  z-index: 1000;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+hr {
+  height: 2px;
 }
