@@ -108,6 +108,7 @@ export const ContextProvider = (props) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((value) => {
         console.log(value);
+        window.location.href="/signin"
       })
       .catch((error) => {
         console.log(error);
