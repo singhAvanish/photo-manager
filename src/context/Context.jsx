@@ -44,42 +44,22 @@ export const ContextProvider = (props) => {
     const files = e.target.files;
     setUpload([...files]); // Update upload state with the selected files
   };
-  // const UploadImage = () => {
-  //   upload.forEach((file) => {
-  //     if (!Array.isArray(upload)) {
-  //       console.error("Upload is not an array");
-  //       return;
-  //     }
 
-  //     // Check if upload array is empty
-  //     if (upload.length === 0) {
-  //       console.log("No files to upload");
-  //       return;
-  //     }
-  //     const imageRef = sRef(storage, `images/${file.name + v4()}`);
-  //     uploadBytes(imageRef, file)
-  //       .then(() => {
-  //         console.log("Upload successful for", file.name);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error uploading image:", error);
-  //       });
-  //   });
-  // };
   const UploadImage = () => {
     upload.forEach((file) => {
-      const imageRef = sRef(storage, `images/${file.name + v4()}`);
+      const imageRef = sRef(storage, images/${file.name + v4()});
       uploadBytes(imageRef, file)
         .then((snapshot) => {
           snapshot.ref.getDownloadURL().then((url) => {
             const imageId = v4();
             const imageData = { url, id: imageId };
-            putData(`images/${imageId}`, imageData);
+            putData(images/${imageId}, imageData);
             console.log("Upload successful for", file.name);
           });
         })
         .catch((error) => {
           console.error("Error uploading image:", error);
+          // Handle error gracefully, e.g., show error message to user
         });
     });
   };
@@ -87,12 +67,9 @@ export const ContextProvider = (props) => {
   useEffect(() => {
     listAll(imageListRef)
       .then((response) => {
-        // Map each item to a promise that fetches the download URL
         const promises = response.items.map((item) => getDownloadURL(item));
-        // Wait for all promises to resolve
         Promise.all(promises)
           .then((urls) => {
-            // Update the imageList state with the array of download URLs
             setImageList(urls);
           })
           .catch((error) => {
@@ -102,13 +79,13 @@ export const ContextProvider = (props) => {
       .catch((error) => {
         console.error("Error listing images:", error);
       });
-  }, []);
+  }, [imageListRef]);
 
   const createUser = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((value) => {
-        console.log(value);
-        window.location.href="/signin"
+        // console.log(value);
+        window.location.href = "/signin";
       })
       .catch((error) => {
         console.log(error);
@@ -118,6 +95,7 @@ export const ContextProvider = (props) => {
   const signInWith = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((value) => {
+        // Use React Router or other routing mechanism instead of window.location.href
         window.location.href = "/photos";
       })
       .catch((error) => {
@@ -147,7 +125,6 @@ export const ContextProvider = (props) => {
         setUpload,
         handleFileChange,
         setImageList,
-        useEffect,
         imageList,
       }}
     >
